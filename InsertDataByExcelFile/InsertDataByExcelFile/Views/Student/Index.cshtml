@@ -1,0 +1,47 @@
+﻿@{
+	ViewData["Title"] = "Student";
+}
+
+<div class="container text-center text-primary">
+	<form method="post" asp-controller="Student" asp-action="Post" enctype="multipart/form-data">
+
+		<div class="mb-3">
+			<label for="formFile" class="form-label">Add Your Student Data List</label>
+			<input class="form-control" type="file" id="formFile" name="file">
+		</div>
+		<button class="btn btn-dark" type="submit">Import from Excel</button>
+
+	</form>
+	<br />
+
+	<h3>@TempData["Done"]</h3>
+</div>
+
+<hr />
+@model List<I_StudentModel>
+<h1 class="text-center">Students</h1>
+
+<table class="table table-bordered text-center">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>RollNo</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var student in Model)
+		{
+			<tr>
+				<td>@student.Id</td>
+				<td>@student.Name</td>
+				<td>@student.Email</td>	
+				<td>@student.RollNo</td>
+			</tr>
+		}
+	</tbody>
+</table>
+@*@Html.Partial("Index");*@
+@(await Component.InvokeAsync("SocialLinksView"))
+@*@(await Component.InvokeAsync("SocialLinks", new { IconsToShow = 5 }))*@
